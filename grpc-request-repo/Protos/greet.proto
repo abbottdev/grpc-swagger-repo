@@ -1,0 +1,54 @@
+syntax = "proto3";
+import "google/api/annotations.proto";
+
+option csharp_namespace = "grpc_request_repo";
+
+package greet;
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply)
+  {
+    option (google.api.http) = {
+      get: "/v1/hello"
+    };
+  }
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+  RequestOnlyEnum requestEnum = 2;
+  SharedEnum sharedEnum = 3;
+}
+
+// The response message containing the greetings.
+message HelloReply {
+  string message = 1;
+  SharedEnum sharedEnum = 2;
+  ReturnOnlyEnum responseEnum = 3;
+}
+
+enum RequestOnlyEnum
+{
+  Request_A = 0;
+  Request_B = 1;
+  Request_C = 2;
+}
+
+
+enum SharedEnum
+{
+  Shared_A = 0;
+  Shared_ = 1;
+  Shared_C = 2;
+}
+
+
+enum ReturnOnlyEnum
+{
+  Return_A = 0;
+  Return_B = 1;
+  Return_C = 2;
+}
